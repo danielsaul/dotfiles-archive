@@ -1,0 +1,152 @@
+#enable kwm compatibility mode
+khd kwm on
+
+# set color of default mode
+khd mode default color 0xFFD5C4A1
+
+khd mode resize prefix on
+khd mode resize timeout 2
+khd mode resize restore default
+khd mode resize color 0xFF2AA198
+
+# Launch terminal
+cmd + alt + ctrl - return           :    open -na /Applications/Hyper.app
+
+# Launch launcher
+#cmd + alt + ctrl - space            :    open -na /Applications/Alfred\ 3.app
+
+# Restart khd
+cmd + alt + ctrl - escape           :    brew services restart khd
+
+# Restart kwm
+cmd + alt + ctrl + shift - escape   :    brew services restart kwm
+
+# Lock Screen
+cmd + alt + ctrl - l                :    pmset displaysleepnow
+
+# Close Window
+cmd + alt + ctrl - w                :    khd -p "cmd - w"
+
+# Close application
+cmd + alt + ctrl - q                :    khd -p "cmd - q"
+
+# Full Screen
+cmd + alt + ctrl - f                :    kwmc window -z fullscreen
+
+# Toggle floating window
+cmd + alt + ctrl - s                :    kwmc window -t focused
+
+# Move between spaces
+#cmd + alt + ctrl - 0x12            :    kwmc space -fExperimental 1
+#cmd + alt + ctrl - 0x13            :    kwmc space -fExperimental 2
+#cmd + alt + ctrl - 0x14            :    kwmc space -fExperimental 3
+#cmd + alt + ctrl - 0x15            :    kwmc space -fExperimental 4
+#cmd + alt + ctrl - 0x16            :    kwmc space -fExperimental 5
+cmd + alt + ctrl + shift - 0x12    :    kwmc window -m space 1
+cmd + alt + ctrl + shift - 0x13    :    kwmc window -m space 2
+cmd + alt + ctrl + shift - 0x14    :    kwmc window -m space 3
+cmd + alt + ctrl + shift - 0x15    :    kwmc window -m space 4
+cmd + alt + ctrl + shift - 0x16    :    kwmc window -m space 5
+
+# Focus windows
+cmd + alt + ctrl - left            :    kwmc window -f west
+cmd + alt + ctrl - right           :    kwmc window -f east
+cmd + alt + ctrl - down            :    kwmc window -f south
+cmd + alt + ctrl - up              :    kwmc window -f north
+cmd + alt + ctrl - 0x2B            :    kwmc window -f prev
+cmd + alt + ctrl - 0x2F            :    kwmc window -f next
+
+# Move windows
+cmd + alt + ctrl + shift - left     :    kwmc window -s west
+cmd + alt + ctrl + shift - down     :    kwmc window -s south
+cmd + alt + ctrl + shift - up       :    kwmc window -s north
+cmd + alt + ctrl + shift - right    :    kwmc window -s east
+cmd + alt + ctrl + shift - 0x2B     :    kwmc window -s prev
+cmd + alt + ctrl + shift - 0x2F     :    kwmc window -s next
+
+# Resize windows
+cmd + alt + ctrl - r               :    khd -e "mode activate resize"
+resize - left                      :    kwmc window -c expand 0.05 west
+resize - down                      :    kwmc window -c expand 0.05 south
+resize - up                        :    kwmc window -c expand 0.05 north
+resize - right                     :    kwmc window -c expand 0.05 east
+resize + shift - right             :    kwmc window -c reduce 0.05 west
+resize + shift - down              :    kwmc window -c reduce 0.05 south
+resize + shift - up                :    kwmc window -c reduce 0.05 north
+resize + shift - left              :    kwmc window -c reduce 0.05 east
+
+# Split mode
+cmd + alt + ctrl - t            :   kwmc window -c split-mode toggle
+
+# Set Space Tiling Mode To BSP
+#cmd + ctrl - a           :    kwmc space -t bsp
+
+# Set Space Tiling Mode To Monocle
+#cmd + ctrl - s           :    kwmc space -t monocle
+
+# Set Space Tiling Mode To Floating
+#cmd + ctrl - d           :    kwmc space -t float
+
+# Rotate Window-Tree By 90degrees (Clockwise)
+#cmd + ctrl - r           :    kwmc tree rotate 90
+
+# Set Temporary Window Container
+#prefix - d               :    kwmc window -z parent
+
+# Mark Window
+#cmd + alt + ctrl - m     :    kwmc window -mk focused
+#cmd + alt + ctrl - h     :    kwmc window -mk west wrap
+#cmd + alt + ctrl - l     :    kwmc window -mk east wrap
+#cmd + alt + ctrl - j     :    kwmc window -mk south wrap
+#cmd + alt + ctrl - k     :    kwmc window -mk north wrap
+
+# Give Focus To Screen
+#cmd + alt - 1            :    kwmc display -f 0
+#cmd + alt - 2            :    kwmc display -f 1
+#cmd + alt - 3            :    kwmc display -f 2
+
+# Pseudo containers
+#cmd + ctrl + alt - p     :    kwmc tree -pseudo create
+#cmd + ctrl + alt - o     :    kwmc tree -pseudo destroy
+#ctrl + alt - p           :    kwmc window -s prev
+#ctrl + alt - n           :    kwmc window -s next
+
+# Detach Focused Window And Reinsert In Direction
+#ctrl + shift - k         :    kwmc window -m north
+#ctrl + shift - l         :    kwmc window -m east
+#ctrl + shift - j         :    kwmc window -m south
+#ctrl + shift - h         :    kwmc window -m west
+
+# Detach Marked Window And Reinsert At Focused Window
+#ctrl + shift - x         :    kwmc window -m mark
+
+# Move Focused Window To Space
+#ctrl + alt - left        :    kwmc window -m space left
+#ctrl + alt - right       :    kwmc window -m space right
+
+# Move Focused Window To Screen
+#ctrl + alt - 1           :    kwmc window -m display 0
+#ctrl + alt - 2           :    kwmc window -m display 1
+#ctrl + alt - 3           :    kwmc window -m display 2
+
+# Increase Container Gaps
+#prefix - x               :    kwmc space -g increase horizontal
+#prefix - y               :    kwmc space -g increase vertical
+
+# Decrease Container Gaps
+#prefix + shift - x       :    kwmc space -g decrease horizontal
+#prefix + shift - y       :    kwmc space -g decrease vertical
+
+# Increase Screen Padding
+#prefix - left            :    kwmc space -p increase left
+#prefix - right           :    kwmc space -p increase right
+#prefix - up              :    kwmc space -p increase top
+#prefix - down            :    kwmc space -p increase bottom
+#prefix - p               :    kwmc space -p increase all
+
+# Decrease Screen Padding
+#prefix + shift - left    :    kwmc space -p decrease left
+#prefix + shift - right   :    kwmc space -p decrease right
+#prefix + shift - up      :    kwmc space -p decrease top
+#prefix + shift - down    :    kwmc space -p decrease bottom
+#prefix + shift - p : kwmc space -p decrease all
