@@ -479,11 +479,11 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>934 248 746 595 0 0 1680 1028 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>96 257 796 473 0 0 1680 1028 </string>
+	<string>96 283 796 473 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1020 283 580 467 0 0 1680 1028 </string>
+	<string>172 465 580 467 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>733 240 580 467 0 0 1680 1028 </string>
+	<string>1059 317 580 467 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>509 372 580 467 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -1264,6 +1264,10 @@
 	</array>
 	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
 	<true/>
+	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt</key>
+	<true/>
+	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt_selection</key>
+	<integer>1</integer>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
@@ -1315,6 +1319,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>/Users/daniel/.config/iterm2</string>
+	<key>PromptOnQuit</key>
+	<false/>
 	<key>QuitWhenAllWindowsClosed</key>
 	<true/>
 	<key>SUEnableAutomaticChecks</key>
