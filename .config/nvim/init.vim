@@ -143,8 +143,8 @@ colorscheme monokai
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 
-let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
-let g:deoplete#sources#clang#clang_header = '/usr/lib/clang/3.8.1'
+let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header = '/Library/Developer/CommandLineTools/usr/lib/clang/9.0.0/'
 
 " Neomake on save
 autocmd! BufWritePost * Neomake
