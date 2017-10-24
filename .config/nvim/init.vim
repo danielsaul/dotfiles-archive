@@ -24,7 +24,6 @@ set autoindent
 
 set noerrorbells        " No beeps.
 set modeline            " Enable modeline.
-set esckeys             " Cursor keys in insert mode.
 set linespace=3         " Set line-spacing
 set nojoinspaces        " Prevents inserting two spaces after punctuation on a join (J)
 
