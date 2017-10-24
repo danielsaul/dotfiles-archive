@@ -1,16 +1,16 @@
 #enable kwm compatibility mode
-khd kwm on
+#§khd kwm on
 
 # set color of default mode
-khd mode default color 0xFFD5C4A1
+#khd mode default color 0xFFD5C4A1
 
 khd mode resize prefix on
 khd mode resize timeout 2
 khd mode resize restore default
-khd mode resize color 0xFF2AA198
+#§khd mode resize color 0xFF2AA198
 
 # Launch terminal
-cmd + alt + ctrl - return           :    open -na /Applications/Hyper.app
+cmd + alt + ctrl - return           :    osascript ~/.config/iterm2/iterm2_start.scpt
 
 # Launch launcher
 #cmd + alt + ctrl - space            :    open -na /Applications/Alfred\ 3.app
