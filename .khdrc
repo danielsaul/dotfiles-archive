@@ -26,10 +26,10 @@ cmd + alt + ctrl - p                :    chunkc tiling::window --toggle split
 cmd + alt + ctrl - s                :    chunkc tiling::window --toggle float
 
 # Entire desktop floating
-cmd + alt + ctrl - [                :    chunkc tiling::desktop --layout float
+cmd + alt + ctrl - 0x21                :    chunkc tiling::desktop --layout float
 
 # Entire desktop bsp
-cmd + alt + ctrl - ]                :    chunkc tiling::desktop --layout bsp
+cmd + alt + ctrl - 0x1e                :    chunkc tiling::desktop --layout bsp
 
 # Equalise windows
 cmd + alt + ctrl - e                :    chunkc tiling::desktop --equalize
