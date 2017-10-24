@@ -10,7 +10,7 @@ HISTCONTROL=ignoredups:ignorespace
 
 alias sudo='sudo '
 
-plugins=(git mosh pip archlinux zsh-iterm-touchbar)
+plugins=(git mosh pip archlinux zsh-iterm-touchbar zsh-completions)
 
 ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
@@ -44,3 +44,4 @@ mkd() {
 alias dotcfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
