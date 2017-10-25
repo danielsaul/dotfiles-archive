@@ -10,7 +10,7 @@ HISTCONTROL=ignoredups:ignorespace
 
 alias sudo='sudo '
 
-plugins=(git mosh pip archlinux zsh-iterm-touchbar zsh-completions)
+plugins=(git mosh pip archlinux zsh-iterm-touchbar zsh-completions zsh-autosuggestions)
 
 ZSH_CACHE_DIR=$HOME/.oh-my-zsh-cache
 if [[ ! -d $ZSH_CACHE_DIR ]]; then
