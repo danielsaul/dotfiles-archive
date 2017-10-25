@@ -39,16 +39,14 @@ cmd + alt + ctrl + shift - 0x12    :    chunkc tiling::window --send-to-desktop 
 cmd + alt + ctrl + shift - 0x13    :    chunkc tiling::window --send-to-desktop 2 
 cmd + alt + ctrl + shift - 0x14    :    chunkc tiling::window --send-to-desktop 3
 cmd + alt + ctrl + shift - 0x15    :    chunkc tiling::window --send-to-desktop 4
-cmd + alt + ctrl + shift - 0x16    :    chunkc tiling::window --send-to-desktop 5
-cmd + alt + ctrl + shift - 0x17    :    chunkc tiling::window --send-to-desktop 6
+cmd + alt + ctrl + shift - 0x17    :    chunkc tiling::window --send-to-desktop 5
+cmd + alt + ctrl + shift - 0x16    :    chunkc tiling::window --send-to-desktop 6
 
 # Focus windows
 cmd + alt + ctrl - left            :    chunkc tiling::window --focus west
 cmd + alt + ctrl - right           :    chunkc tiling::window --focus east
 cmd + alt + ctrl - down            :    chunkc tiling::window --focus south
 cmd + alt + ctrl - up              :    chunkc tiling::window --focus north
-cmd + alt + ctrl - 0x2B            :    chunkc tiling::window --focus prev
-cmd + alt + ctrl - 0x2F            :    chunkc tiling::window --focus next
 
 # Move windows
 cmd + alt + ctrl + shift - left     :    chunkc tiling::window --warp west
