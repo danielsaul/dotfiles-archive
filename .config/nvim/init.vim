@@ -105,6 +105,8 @@ Plug 'reedes/vim-colors-pencil'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+
 Plug 'othree/html5.vim'
 Plug 'gko/vim-coloresque'
 Plug 'JulesWang/css.vim'
