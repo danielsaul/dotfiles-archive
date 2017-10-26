@@ -386,6 +386,8 @@
 	<string>9CE10A02-EC01-4B72-A0EC-841782B10FFA</string>
 	<key>DimOnlyText</key>
 	<false/>
+	<key>DisableWindowSizeSnap</key>
+	<true/>
 	<key>DrawOutlineAroundCursor</key>
 	<false/>
 	<key>EnableDivisionView</key>
@@ -479,17 +481,23 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>934 248 746 595 0 0 1680 1028 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>96 283 796 473 0 0 1680 1028 </string>
+	<string>96 309 796 473 0 0 1680 1028 </string>
+	<key>NSWindow Frame UKCrashReporter</key>
+	<string>127 444 592 584 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>172 465 580 467 0 0 1680 1028 </string>
+	<string>18 218 1644 790 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1059 317 580 467 0 0 1680 1028 </string>
+	<string>18 24 1644 178 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>509 372 580 467 0 0 1680 1028 </string>
+	<string>18 25 1644 977 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>87 207 580 467 0 0 1680 1028 </string>
+	<string>18 18 1644 992 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>20 235 580 467 0 0 1680 1028 </string>
+	<string>1011 25 650 977 0 0 1680 1028 </string>
+	<key>NSWindow Frame iTerm Window 5</key>
+	<string>296 9 580 467 0 0 1680 1028 </string>
+	<key>NSWindow Frame iTerm Window 6</key>
+	<string>338 561 580 467 0 0 1680 1028 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1276,6 +1284,8 @@
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>530486003.93534201</real>
 	<key>OpenArrangementAtStartup</key>
@@ -1284,6 +1294,8 @@
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
 	<true/>
+	<key>PMPrintingExpandedStateForPrint2</key>
+	<false/>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -1319,6 +1331,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>/Users/daniel/.config/iterm2</string>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>QuitWhenAllWindowsClosed</key>
@@ -1351,6 +1365,8 @@
 	<array>
 		<string>Profiles</string>
 	</array>
+	<key>UKCrashReporterLastCrashReportDate</key>
+	<real>1508846336</real>
 	<key>URLHandlersByGuid</key>
 	<dict>
 		<key>ssh</key>
