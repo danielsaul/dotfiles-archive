@@ -154,6 +154,7 @@ autocmd! BufWritePost * Neomake
 " indent line
 let g:indentLine_char = '│'
 let g:indentLine_color_term = 237
+let g:indentLine_fileTypeExclude = ['json']
 
 " NERDTree ctrl-n
 map <C-n> :NERDTreeToggle<CR>
