@@ -1,5 +1,6 @@
 # Launch terminal
 cmd + alt + ctrl - return           :    osascript ~/.config/iterm2/iterm2_start.scpt
+cmd + alt + ctrl + shift - return   :    chunkc set window_float_next 1 && osascript ~/.config/iterm2/iterm2_start.scpt
 
 # Restart khd
 cmd + alt + ctrl - escape           :    brew services restart khd
