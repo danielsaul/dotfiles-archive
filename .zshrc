@@ -46,3 +46,9 @@ alias dotcfg='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 export EDITOR="nvim"
+
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH=$PATH:$(go env GOPATH)/bin
+export GOPATH=$(go env GOPATH)
+export PATH="/usr/local/opt/llvm/bin:$PATH"

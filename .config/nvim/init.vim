@@ -1,5 +1,5 @@
 " True colour
-"set termguicolors
+" set termguicolors
 
 if has('mouse')
     set mouse=a
@@ -46,10 +46,16 @@ set incsearch           " Incremental search.
 set gdefault            " Use 'g' flag by default with :s/foo/bar/.
 set magic               " Use 'magic' patterns (extended regular expressions).
 
+set signcolumn=yes      " Always show sign column
+
+set numberwidth=5
+
 set updatetime=250      " Change updatetime to 250ms
 
-syntax on
+:let mapleader=","			" <leader> is ,
 
+syntax on
+ 
 "Python
 let g:python2_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
@@ -62,14 +68,13 @@ if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
 endif
 
-
 " Space instead of :
 nnoremap <space> :
 
 " CD
 set autochdir
 cd ~/
-autocmd BufEnter * cd %:p:h
+autocmd BufEnter * silent! lcd %:p:h
 
 " Panes
 map <C-up> <C-w><up>
@@ -103,23 +108,32 @@ Plug 'crusoexia/vim-monokai'
 Plug 'reedes/vim-colors-pencil'
 
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+
+Plug 'tpope/vim-commentary'
+
+Plug 'ntpeters/vim-better-whitespace'
 
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+
+Plug 'fatih/vim-go'
+Plug 'sebdah/vim-delve'
 
 Plug 'othree/html5.vim'
 Plug 'gko/vim-coloresque'
 Plug 'JulesWang/css.vim'
 
-Plug 'vim-scripts/Miranda-syntax-highlighting'
-
 Plug 'matze/vim-move'
 
-Plug 'rstacruz/vim-closer'
+"Plug 'rstacruz/vim-closer'
+Plug 'jiangmiao/auto-pairs'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
 Plug 'zchee/deoplete-clang'
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 
 Plug 'hynek/vim-python-pep8-indent'
 
@@ -131,52 +145,87 @@ Plug 'neomake/neomake'
 
 Plug 'lervag/vimtex'
 
-Plug 'reedes/vim-lexical'
-Plug 'reedes/vim-pencil'
-
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 colorscheme monokai
-"colorscheme nord
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
+set completeopt-=preview
+
+" Let <Tab> also do completion
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 let g:deoplete#sources#clang#clang_header = '/Library/Developer/CommandLineTools/usr/lib/clang/9.0.0/'
 
 " Neomake on save
-autocmd! BufWritePost * Neomake
+" autocmd! BufWritePost * Neomake
+" Neomake on writing buffer and normal mode changes after 1000ms
+call neomake#configure#automake('nw', 1000)
 
 " indent line
-let g:indentLine_char = '│'
-let g:indentLine_color_term = 237
-let g:indentLine_fileTypeExclude = ['json']
+let g:indentLine_char = '▏' "'│'
+let g:indentLine_color_term = 236
+"let g:indentLine_fileTypeExclude = ['json']
 
 " NERDTree ctrl-n
 map <C-n> :NERDTreeToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+" Fugitive, git status toggle ctrl-/
+function! ToggleGStatus()
+    if buflisted(bufname('.git/index'))
+        bd .git/index
+    else
+        Gstatus
+    endif
+endfunction
+command ToggleGStatus :call ToggleGStatus()
+nmap <silent> <C-_> :ToggleGStatus<CR>
 
 " Airline
 let g:airline_powerline_fonts = 1
 let g:airline_theme='papercolor'
+let g:airline#extensions#tabline#enabled = 1
 
-" Pencil
-set nocompatible
-filetype plugin on       " may already be in your .vimrc
+" Set sign column colour
+let g:gitgutter_override_sign_column_highlight = 0
+highlight SignColumn ctermbg=234
 
-let g:pencil#wrapModeDefault = 'soft' 
+highlight ExtraWhitespace ctermbg=52
 
-augroup pencil
-  autocmd!
-  autocmd FileType markdown,mkd call pencil#init()
-  autocmd FileType text         call pencil#init()
-  autocmd FileType tex          call pencil#init()
-                            \ | call lexical#init()  
-augroup END
+" 100 column width, doeesn't work on load??
+highlight OverLength ctermbg=52
+match OverLength /\%101v.\+/
 
-" Miranda
-autocmd BufRead,BufNewFile *.m set filetype=Miranda
+"Fzf
+nnoremap <C-space> :Files<cr>
+nnoremap <C-b> :Buffers<cr>
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
+" Go
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+
+let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+
+" Switch to go tests
+au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
+au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
+au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
+au FileType go nmap <leader>gt :GoTest -short<cr>
+au FileType go nmap <leader>gc :GoCoverageToggle -short<cr>
