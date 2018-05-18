@@ -1,5 +1,5 @@
 " True colour
-" set termguicolors
+set termguicolors
 
 if has('mouse')
     set mouse=a
@@ -14,7 +14,6 @@ set laststatus=2
 set showmatch           " Show matching brackets.
 set showmode            " Show current mode.
 set ruler               " Show the line and column numbers of the cursor.
-set number              " Show the line numbers on the left side.
 set formatoptions+=o    " Continue comment marker in new lines.
 set textwidth=0         " Hard-wrap long lines as you type them.
 set expandtab           " Insert spaces when TAB is pressed.
@@ -31,7 +30,7 @@ set splitbelow          " Horizontal split below current.
 set splitright          " Vertical split to right of current.
 
 if !&scrolloff
-  set scrolloff=3       " Show next 3 lines while scrolling.
+  set scrolloff=10      " Show next 3 lines while scrolling.
 endif
 if !&sidescrolloff
   set sidescrolloff=5   " Show next 5 columns while side-scrolling.
@@ -55,13 +54,22 @@ set updatetime=250      " Change updatetime to 250ms
 :let mapleader=","			" <leader> is ,
 
 syntax on
- 
+
+" Line numbers
+set number              " Show the line numbers on the left side.
+set relativenumber      " Use relative line numbers
+:augroup numbertoggle   " Intelligent relative numbers
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+:augroup END
+
 "Python
 let g:python2_host_prog = '/usr/local/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Clipboard
-:set clipboard+=unnamedplus 
+:set clipboard+=unnamedplus
 
 " Use <C-L> to clear the highlighting of :set hlsearch.
 if maparg('<C-L>', 'n') ==# ''
@@ -106,9 +114,12 @@ Plug 'crusoexia/vim-monokai'
 "Plug 'rakr/vim-two-firewatch'
 "Plug 'arcticicestudio/nord-vim'
 Plug 'reedes/vim-colors-pencil'
+Plug 'rakr/vim-two-firewatch'
+Plug 'jacoborus/tender.vim'
 
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'tommcdo/vim-fugitive-blame-ext'
 
 Plug 'tpope/vim-commentary'
 
@@ -152,7 +163,8 @@ Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 call plug#end()
 
-colorscheme monokai
+set rtp+=~/.config/nvim/neon.vim
+colorscheme neon.vim
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
@@ -172,6 +184,7 @@ call neomake#configure#automake('nw', 1000)
 " indent line
 let g:indentLine_char = '▏' "'│'
 let g:indentLine_color_term = 236
+let g:indentLine_color_gui = '#2C2C2C'
 "let g:indentLine_fileTypeExclude = ['json']
 
 " NERDTree ctrl-n
@@ -191,21 +204,23 @@ nmap <silent> <C-_> :ToggleGStatus<CR>
 
 " Airline
 let g:airline_powerline_fonts = 1
-let g:airline_theme='papercolor'
+let g:neon_airline = 1
+let g:airline_theme='neon'
 let g:airline#extensions#tabline#enabled = 1
 
 " Set sign column colour
 let g:gitgutter_override_sign_column_highlight = 0
 highlight SignColumn ctermbg=234
 
-highlight ExtraWhitespace ctermbg=52
+highlight ExtraWhitespace ctermbg=52 guibg=#5b1a2c
 
 " 100 column width, doeesn't work on load??
-highlight OverLength ctermbg=52
+highlight OverLength ctermbg=52 guibg=#5b1a2c
 match OverLength /\%101v.\+/
 
 "Fzf
-nnoremap <C-space> :Files<cr>
+command GFilesFallback :execute system('git rev-parse --is-inside-work-tree') =~ 'true' ? 'GFiles' : 'Files'
+nnoremap <C-space> :GFilesFallback<cr>
 nnoremap <C-b> :Buffers<cr>
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
