@@ -52,3 +52,5 @@ export EDITOR="nvim"
 export PATH=$PATH:$(go env GOPATH)/bin
 export GOPATH=$(go env GOPATH)
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'

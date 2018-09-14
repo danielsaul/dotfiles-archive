@@ -8,7 +8,6 @@ endif
 " Cursor
 "let $NVIM_TUI_ENABLE_CURSOR_SHAPE=e
 
-
 set showcmd             " Show (partial) command in status line.
 set laststatus=2
 set showmatch           " Show matching brackets.
@@ -22,7 +21,7 @@ set shiftwidth=2        " Indentation amount for < and > commands.
 set autoindent
 
 set noerrorbells        " No beeps.
-set modeline            " Enable modeline.
+set noshowmode
 set linespace=3         " Set line-spacing
 set nojoinspaces        " Prevents inserting two spaces after punctuation on a join (J)
 
@@ -81,8 +80,8 @@ nnoremap <space> :
 
 " CD
 set autochdir
-cd ~/
-autocmd BufEnter * silent! lcd %:p:h
+" cd ~/
+" autocmd BufEnter * silent! lcd %:p:h
 
 " Panes
 map <C-up> <C-w><up>
@@ -109,6 +108,8 @@ endif
 
 " vim-plug
 call plug#begin()
+"Plug 'airblade/vim-rooter'
+Plug 'dbakker/vim-projectroot'
 
 Plug 'crusoexia/vim-monokai'
 "Plug 'rakr/vim-two-firewatch'
@@ -116,6 +117,7 @@ Plug 'crusoexia/vim-monokai'
 Plug 'reedes/vim-colors-pencil'
 Plug 'rakr/vim-two-firewatch'
 Plug 'jacoborus/tender.vim'
+Plug 'nightsense/snow'
 
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
@@ -127,18 +129,23 @@ Plug 'ntpeters/vim-better-whitespace'
 
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+Plug 'posva/vim-vue'
 
 Plug 'fatih/vim-go'
 Plug 'sebdah/vim-delve'
 
 Plug 'othree/html5.vim'
-Plug 'gko/vim-coloresque'
+"Plug 'gko/vim-coloresque'
 Plug 'JulesWang/css.vim'
+
+Plug 'shmup/vim-sql-syntax'
 
 Plug 'matze/vim-move'
 
 "Plug 'rstacruz/vim-closer'
 Plug 'jiangmiao/auto-pairs'
+
+Plug 'Shougo/echodoc.vim'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-jedi'
@@ -161,14 +168,29 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+
 call plug#end()
 
 set rtp+=~/.config/nvim/neon.vim
-colorscheme neon.vim
+colorscheme neon
+
+let g:rooter_manual_only = 1
+" If no project root, change to current dir
+" let g:rooter_change_directory_for_non_project_files = 'current'
+
+" Disable annoying sql complete thing
+let g:omni_sql_no_default_maps = 1
 
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
+"call deoplete#custom#option('max_list', 10)
 set completeopt-=preview
+"set completeopt=longest,menuone
+
+inoremap <expr> <Left>      pumvisible() ? "\<C-e>" : "\<Left>"
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 
 " Let <Tab> also do completion
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
@@ -176,16 +198,24 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 let g:deoplete#sources#clang#clang_header = '/Library/Developer/CommandLineTools/usr/lib/clang/9.0.0/'
 
+" Echodoc
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#highlight_identifier = "Function"
+let g:echodoc#highlight_arguments = "Type"
+
 " Neomake on save
-" autocmd! BufWritePost * Neomake
+autocmd! BufWritePost * Neomake
 " Neomake on writing buffer and normal mode changes after 1000ms
-call neomake#configure#automake('nw', 1000)
+" call neomake#configure#automake('nw', 1000)
+"let g:neomake_open_list = 2
 
 " indent line
 let g:indentLine_char = '▏' "'│'
 let g:indentLine_color_term = 236
 let g:indentLine_color_gui = '#2C2C2C'
 "let g:indentLine_fileTypeExclude = ['json']
+
+set conceallevel=0
 
 " NERDTree ctrl-n
 map <C-n> :NERDTreeToggle<CR>
@@ -219,12 +249,40 @@ highlight OverLength ctermbg=52 guibg=#5b1a2c
 match OverLength /\%101v.\+/
 
 "Fzf
-command GFilesFallback :execute system('git rev-parse --is-inside-work-tree') =~ 'true' ? 'GFiles' : 'Files'
-nnoremap <C-space> :GFilesFallback<cr>
+" command GFilesFallback :execute system('git rev-parse --is-inside-work-tree') =~ 'true' ? 'GFiles' : 'Files'
+" nnoremap <C-space> :GFilesFallback<cr>
+command ProjFiles execute 'Files' ProjectRootGuess()
+nnoremap <C-space> :ProjFiles<cr>
 nnoremap <C-b> :Buffers<cr>
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+
+command! -bang -nargs=* FindRG
+  \ call fzf#vim#grep('rg --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" --colors "line:fg:0xCB,0x89,0xDE" --colors "match:fg:0xFE,0x40,0x80" --colors "path:fg:0x5E,0xC8,0xDC" '.shellescape(<q-args>),
+  \ 1,
+  \ <bang>0 ? fzf#vim#with_preview('up:60%')
+  \         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \ <bang>0)
+
+nnoremap \ :Find<SPACE>
+nnoremap <C-f> :ProjectRootExe Find<SPACE>
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " Go
 let g:go_highlight_extra_types = 1
@@ -244,3 +302,6 @@ au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
 au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
 au FileType go nmap <leader>gt :GoTest -short<cr>
 au FileType go nmap <leader>gc :GoCoverageToggle -short<cr>
+
+" vue syntax highlighting is bad. 
+autocmd FileType vue syntax sync fromstart
