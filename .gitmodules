@@ -1,3 +1,3 @@
 [submodule ".config/nvim/neon.vim"]
 	path = .config/nvim/neon.vim
-	url = /Users/daniel/.config/nvim/neon.vim
+	url = https://github.com/danielsaul/neon.vim 
