@@ -8,3 +8,6 @@
   interactive = auto
   ui = true
   pager = true
+[alias]
+  co = checkout
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %C(bold blue)%an%Creset %Cgreen%cr%Creset' --abbrev-commit --
