@@ -1,0 +1,33 @@
+{
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "args": [],
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    }
+  },
+  //"suggest.noselect": false,
+  //"suggest.minTriggerInputLength": 2,
+  "suggest.acceptSuggestionOnCommitCharacter": true,
+  "diagnostic.displayByAle": true,
+  "coc.preferences.colorSupport": true,
+  "suggest.enablePreview": false,
+  //"coc.preferences.hoverTarget": "float",
+  //"signature.target": "float",
+ //"coc.preferences.previewAutoClose": false,
+  //"suggest.detailField": "preview",
+  "signature.hideOnTextChange": false,
+  "suggest.detailField": "preview",
+  "diagnostic.enable": false,
+  "html.enable": true,
+  "html.format.enable": true,
+  "html.format.indentInnerHtml": true
+}
+
